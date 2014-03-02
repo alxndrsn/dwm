@@ -1,0 +1,26 @@
+#!/bin/sh
+battery_percent() {
+	local charge_now=$(cat /sys/class/power_supply/BAT0/charge_now)
+	local charge_full=$(cat /sys/class/power_supply/BAT0/charge_full)
+	local charge=$(($charge_now * 100 / $charge_full))
+	echo $charge
+}
+battery_status() {
+	local battery_charge=$(battery_percent)
+	local battery_status=$(cat /sys/class/power_supply/BAT0/status)
+	echo "${battery_charge}% ($battery_status)"
+}
+
+while true; do
+	datetime=$(date +'%a %-d %b %H:%M')
+	battery=$(battery_status)
+
+	status_line="$battery $datetime"
+	xsetroot -name "$status_line"
+	sleep 1m
+done &
+
+xfce4-volumed # enable xfce volume controller (works in dwm, and with keyboard buttons)
+nm-applet & # wifi applet to enable easy connection to wifi networks
+exec dwm
+
