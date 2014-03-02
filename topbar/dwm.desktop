@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=dwm
+Comment=This session starts dwm
+Exec=/home/user/workspaces/bash/dwm_status_bar/bin/dwm_launcher_with_status
+Exec=/home/user/workspaces/suckless/dwm/topbar/dwm_launcher_with_status
+Type=Application 

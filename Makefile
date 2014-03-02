@@ -50,11 +50,13 @@ install: all
 	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	@sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	@chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	@cp topbar/dwm.desktop /usr/share/xsessions/
 
 uninstall:
 	@echo removing executable file from ${DESTDIR}${PREFIX}/bin
 	@rm -f ${DESTDIR}${PREFIX}/bin/dwm
 	@echo removing manual page from ${DESTDIR}${MANPREFIX}/man1
 	@rm -f ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	@rm /usr/share/xsessions/dwm.desktop
 
 .PHONY: all options clean dist install uninstall
