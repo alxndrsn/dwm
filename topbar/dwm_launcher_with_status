@@ -8,7 +8,20 @@ battery_percent() {
 battery_status() {
 	local battery_charge=$(battery_percent)
 	local battery_status=$(cat /sys/class/power_supply/BAT0/status)
-	echo "${battery_charge}% ($battery_status)"
+	case "$battery_status" in
+		Discharging)
+			echo "${battery_charge}%-"
+			;;
+		Charging)
+			echo "${battery_charge}%+"
+			;;
+		Full)
+			echo $battery_charge
+			;;
+		*)
+			echo "${battery_charge}% ($battery_status)"
+			;;
+	esac
 }
 
 while true; do
