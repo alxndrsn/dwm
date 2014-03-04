@@ -1847,7 +1847,7 @@ setup(void) {
 	fnt = drw_font_create(dpy, font);
 	sw = DisplayWidth(dpy, screen);
 	sh = DisplayHeight(dpy, screen);
-	bh = fnt->h + 2;
+	bh = fnt->h - 2;
 	th = bh;
 	drw = drw_create(dpy, screen, root, sw, sh);
 	drw_setfont(drw, fnt);
