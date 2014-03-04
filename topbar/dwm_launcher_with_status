@@ -16,7 +16,7 @@ battery_status() {
 			echo "${battery_charge}%+"
 			;;
 		Full)
-			echo $battery_charge
+			echo "${battery_charge}%"
 			;;
 		*)
 			echo "${battery_charge}% ($battery_status)"
@@ -35,5 +35,6 @@ done &
 
 xfce4-volumed # enable xfce volume controller (works in dwm, and with keyboard buttons)
 nm-applet & # wifi applet to enable easy connection to wifi networks
+xmodmap -e "keycode 135 = Super_L"  # reassign Context Menu button to Windows button
 exec dwm
 
