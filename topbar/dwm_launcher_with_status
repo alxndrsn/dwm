@@ -1,9 +1,6 @@
 #!/bin/sh
 battery_percent() {
-	local charge_now=$(cat /sys/class/power_supply/BAT0/charge_now)
-	local charge_full=$(cat /sys/class/power_supply/BAT0/charge_full)
-	local charge=$(($charge_now * 100 / $charge_full))
-	echo $charge
+	cat /sys/class/power_supply/BAT0/capacity
 }
 battery_status() {
 	local battery_charge=$(battery_percent)
