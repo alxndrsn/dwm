@@ -3,20 +3,21 @@ battery_percent() {
 	cat /sys/class/power_supply/BAT0/capacity
 }
 battery_status() {
+	local battery_status=$(cat /sys/class/power_supply/ADP1/online)
 	local battery_charge=$(battery_percent)
-	local battery_status=$(cat /sys/class/power_supply/BAT0/status)
+	if [[ "${battery_charge}" = "100" ]]; then
+		echo "${battery_charge}%"
+		return
+	fi
 	case "$battery_status" in
-		Discharging)
+		0)
 			echo "${battery_charge}%-"
 			;;
-		Charging)
+		1)
 			echo "${battery_charge}%+"
 			;;
-		Full)
-			echo "${battery_charge}%"
-			;;
 		*)
-			echo "${battery_charge}% ($battery_status)"
+			echo "${battery_charge}%?"
 			;;
 	esac
 }
